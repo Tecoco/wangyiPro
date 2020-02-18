@@ -38,9 +38,9 @@
     <!-- 商品列表导航 -->
     <div class="shopList-nav">
       <ul>
-        <li v-for="(cateItem, index) in indexCateModule" :key="index">
-          <img src="https://picsum.photos/60/60" alt="">
-          <span>{{cateItem.name}}</span>
+        <li v-for="(kingKongItem, index) in kingKongList" :key="index">
+          <img :src="kingKongItem.picUrl" alt="">
+          <span>{{kingKongItem.text}}</span>
         </li>
       </ul>
     </div>
@@ -98,7 +98,246 @@
     </div>
     <!-- 类目热搜榜 -->
     <div class="category-hotSell-module">
-
+      <div class="hotSell-module-title"><span>{{categoryHotSellModule.title}}</span></div>
+      <div class="hotSell-module-content">
+        <div class="content-top">
+          <div class="content-top-left">
+            <div class="text">
+              <span>热销榜</span>
+            </div>
+            <div class="img-wrap">
+              <img src="https://yanxuan-item.nosdn.127.net/db4a9cbd2bdfed303e2536db8b40fe33.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+            </div>
+          </div>
+          <div class="content-top-right">
+             <div class="text">
+              <span>好评榜</span>
+            </div>
+            <div class="img-wrap">
+              <img src="https://yanxuan-item.nosdn.127.net/bb9025c24057dfb89403055ac5b9f85c.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="content-bottom">
+          <ul>
+            <li>
+              <div class="title"><span>居家生活榜</span></div>
+              <div class="img-wrap">
+               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+              </div>
+            </li>
+            <li>
+              <div class="title"><span>居家生活榜</span></div>
+              <div class="img-wrap">
+               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+              </div>
+            </li>
+            <li>
+              <div class="title"><span>居家生活榜</span></div>
+              <div class="img-wrap">
+               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+              </div>
+            </li>
+            <li>
+              <div class="title"><span>居家生活榜</span></div>
+              <div class="img-wrap">
+               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+              </div>
+            </li>
+            <li>
+              <div class="title"><span>居家生活榜</span></div>
+              <div class="img-wrap">
+               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+              </div>
+            </li>
+            <li>
+              <div class="title"><span>居家生活榜</span></div>
+              <div class="img-wrap">
+               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+              </div>
+            </li>
+            <li>
+              <div class="title"><span>居家生活榜</span></div>
+              <div class="img-wrap">
+               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+              </div>
+            </li>
+            <li>
+              <div class="title"><span>居家生活榜</span></div>
+              <div class="img-wrap">
+               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+              </div>
+            </li>
+           
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!-- 限时购 -->
+    <div class="flashSale-module">
+      <div class="flashSale-module-title">
+        <div class="flashSale"><span>限时购</span></div>
+        <div class="count-time">
+          <span class="hour">00</span>
+          <span class="dot">:</span>
+          <span class="minute">00</span>
+          <span class="dot">:</span>
+          <span class="second">00</span>
+        </div>
+        <div class="more">更多 ></div>
+      </div>
+      <div class="flashSale-content">
+        <ul>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
+            <div class="price">
+              <span>￥290</span>
+              <span><del>￥330</del></span>
+            </div>
+          </li>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
+            <div class="price">
+              <span>￥290</span>
+              <span><del>￥330</del></span>
+            </div>
+          </li>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
+            <div class="price">
+              <span>￥290</span>
+              <span><del>￥330</del></span>
+            </div>
+          </li>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
+            <div class="price">
+              <span>￥290</span>
+              <span><del>￥330</del></span>
+            </div>
+          </li>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
+            <div class="price">
+              <span>￥290</span>
+              <span><del>￥330</del></span>
+            </div>
+          </li>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
+            <div class="price">
+              <span>￥290</span>
+              <span><del>￥330</del></span>
+            </div>
+          </li>
+         
+          
+        </ul>
+      </div>
+    </div>
+    <!-- 新品首发 -->
+    <div class="newItem-module">
+      <div class="newItem-title">
+        <div class="newItem"><span>新品首发</span></div>
+        <div class="more">更多 ></div>
+      </div>
+      <div class="newItem-content">
+        <ul>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
+            <div class="good">
+              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
+              <div class="price"><span>￥59</span></div>
+              <div class="tag-wrap"><span>特价</span></div>
+            </div>
+          </li>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
+            <div class="good">
+              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
+              <div class="price"><span>￥59</span></div>
+              <div class="tag-wrap"><span>特价</span></div>
+            </div>
+          </li>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
+            <div class="good">
+              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
+              <div class="price"><span>￥59</span></div>
+              <div class="tag-wrap"><span>特价</span></div>
+            </div>
+          </li>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
+            <div class="good">
+              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
+              <div class="price"><span>￥59</span></div>
+              <div class="tag-wrap"><span>特价</span></div>
+            </div>
+          </li>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
+            <div class="good">
+              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
+              <div class="price"><span>￥59</span></div>
+              <div class="tag-wrap"><span>特价</span></div>
+            </div>
+          </li>
+          <li>
+            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
+            <div class="good">
+              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
+              <div class="price"><span>￥59</span></div>
+              <div class="tag-wrap"><span>特价</span></div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <!--  -->
+    <div class="sceneLight-shoppingGuide-module">
+      <ul>
+        <li>
+          <div class="title">
+            <span>断货补单王</span><br>
+            <span>紧急补仓疯抢中</span>
+          </div>
+          <div class="pic">
+            <img src="https://yanxuan-item.nosdn.127.net/5e818e36e0cfd0bb474c57f27e76b46d.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
+            <img src="https://yanxuan-item.nosdn.127.net/445689c4faa55f8186c500e68bff73d6.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
+          </div>
+        </li>
+         <li>
+          <div class="title">
+            <span>断货补单王</span><br>
+            <span>紧急补仓疯抢中</span>
+          </div>
+          <div class="pic">
+            <img src="https://yanxuan-item.nosdn.127.net/5e818e36e0cfd0bb474c57f27e76b46d.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
+            <img src="https://yanxuan-item.nosdn.127.net/445689c4faa55f8186c500e68bff73d6.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
+          </div>
+        </li>
+         <li>
+          <div class="title">
+            <span>断货补单王</span><br>
+            <span>紧急补仓疯抢中</span>
+          </div>
+          <div class="pic">
+            <img src="https://yanxuan-item.nosdn.127.net/5e818e36e0cfd0bb474c57f27e76b46d.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
+            <img src="https://yanxuan-item.nosdn.127.net/445689c4faa55f8186c500e68bff73d6.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
+          </div>
+        </li>
+         <li>
+          <div class="title">
+            <span>断货补单王</span><br>
+            <span>紧急补仓疯抢中</span>
+          </div>
+          <div class="pic">
+            <img src="https://yanxuan-item.nosdn.127.net/5e818e36e0cfd0bb474c57f27e76b46d.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
+            <img src="https://yanxuan-item.nosdn.127.net/445689c4faa55f8186c500e68bff73d6.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
+          </div>
+        </li>
+      </ul>
     </div>
 
   </div>
@@ -116,16 +355,20 @@ export default {
       scrollY: 0, //内容滚动的距离
       focusList: [],
       policyDescList: [],
-      indexCateModule: []
+      indexCateModule: [],
+      kingKongList: [],
+      categoryHotSellModule: {}
     }
   },
   async mounted() {
     //发送ajax请求，获取首页对应的数据
     let indexDatas = await this.$API.getIndexData();
-    const {focusList, policyDescList, indexCateModule} = indexDatas;
+    const {focusList, policyDescList, indexCateModule, kingKongModule, categoryHotSellModule} = indexDatas;
     this.focusList = focusList;
     this.policyDescList = policyDescList;
     this.indexCateModule = indexCateModule;
+    this.kingKongList = kingKongModule.kingKongList;
+    this.categoryHotSellModule = categoryHotSellModule;
     this.$nextTick(() => {
       //创建Swiper实例对象
       new Swiper(".swiper-container", {
@@ -171,7 +414,7 @@ export default {
 @import '../../common/stylus/mixins.styl';
 #msite 
   width 100%
-  height 3000px
+  height 6000px
   background-color #eee
 
   // 头部搜索部分
@@ -288,7 +531,6 @@ export default {
     width 100%
     height 340px
     background-color #fff
-
     ul
       width 100%
       height 100%
@@ -301,6 +543,8 @@ export default {
         height 156px
         float left
         img 
+          width 110px
+          height 110px
           border-radius 30px
         span 
           margin-top 10px
@@ -336,7 +580,7 @@ export default {
     padding 0 30px 30px 30px
     box-sizing border-box
     background-color #fff
-    margin 20px 0 30px 0
+    margin 20px 0
     //标题
     .module-title
       width 100%
@@ -445,7 +689,255 @@ export default {
             padding 0 8px
 
   //类目热搜榜
-  // .category-hotSell-module
+  .category-hotSell-module
+    width 100%
+    padding 0 30px 20px 
+    box-sizing border-box
+    background-color #fff
+    .hotSell-module-title
+      width 100%
+      height 100px
+      line-height 100px
+      font-size 32px
+    //内容顶部
+    .hotSell-module-content
+      width 100%
+      .content-top
+        display flex
+        width 100%
+        height 200px
+        >div
+          width 50%
+          height 100%
+          border-radius 5px
+        .content-top-left, .content-top-right
+          display flex
+          width 50%
+          background-color #f9f3e4
+          padding-left 20px
+          line-height 150px
+          margin 0 10px 10px 0
+          >div
+            width 50%
+            height 100%
+          .text
+            position relative
+            font-size 28px
+            &::after
+              content ''
+              display block
+              position absolute
+              left 0
+              top 50%
+              margin-top 10px
+              width 48px
+              height 4px
+              background-color #666
+          .img-wrap
+            width 100%
+            height 100%
+            img 
+              width 100%
+              height 100%
+        .content-top-right
+          background-color #ebeff6
+          margin-right 0
+      .content-bottom
+        margin-top 10px
+        width 100%
+        ul
+          width 100%
+          overflow hidden
+          box-sizing border-box
+          li
+            position relative
+            width 165px
+            height 180px
+            float left
+            border-radius 5px
+            background-color #f5f5f5
+            margin 0 10px 10px 0
+            &:nth-child(4), &:nth-child(8)
+              margin-right 0
+            .title
+              width 100%
+              height 36px
+              font-size 24px
+              text-align center
+              line-height 36px
+              padding-top 10px
+            .img-wrap 
+              position absolute
+              left 50%
+              transform translateX(-50%)
+              top 50px
+              width 120px
+              height 120px
+              text-align center
+              img 
+                width 100%
+                height 100%
+  //限时购
+  .flashSale-module
+    width 100%
+    padding 0 30px
+    background-color #fff
+    box-sizing border-box
+    margin 20px 0
+    .flashSale-module-title
+      display flex
+      width 100%
+      height 100px
+      line-height 100px
+      font-size 32px
+      .flashSale
+        flex-grow 1
+      .count-time
+        flex-grow 7
+        .hour, .minute, .second
+          width 36px
+          height 36px
+          background-color #333
+          text-align center
+          line-height 36px
+          color #fff
+          font-size 24px
+          padding 0 5px
+          border-radius 5px
+        .dot
+          margin 0 10px
+      .more
+        flex-grow 2
+        text-align right
+    .flashSale-content
+      width 100%
+      box-sizing border-box
+      ul
+        width 100%
+        overflow hidden
+        li
+          width 216px
+          float left
+          padding-bottom 30px
+          margin-right 20px
+          border-radius 5px
+          &:nth-child(3), &:nth-child(6)
+            margin-right 0
+          >.img-wrap
+            width 216px
+            height 216px
+            background-color #f5f5f5
+            img
+              width 100%
+              height 100%
+          .price
+            width 100%
+            margin-top 10px
+            padding-left 20px
+            span 
+              &:nth-child(1)
+                color $mainColor
+                font-size 28px
+                margin-right 10px
+              &:nth-child(2)
+                font-size 24px
+  //新品首发
+  .newItem-module
+    width 100%
+    padding 0 30px
+    background-color #fff
+    box-sizing border-box
+    margin 20px 0
+    padding-bottom 26px
+    .newItem-title
+      display flex
+      width 100%
+      height 100px
+      line-height 100px
+      font-size 32px
+      .newItem
+        flex-grow 1
+      .more
+        flex-grow 2
+        text-align right
+    .newItem-content
+      width 100%
+      box-sizing border-box
+      ul
+        width 100%
+        overflow hidden
+        li
+          width 216px
+          float left
+          padding-bottom 30px
+          margin-right 20px
+          border-radius 5px
+          &:nth-child(3), &:nth-child(6)
+            margin-right 0
+          >.img-wrap
+            width 216px
+            height 216px
+            background-color #f5f5f5
+            img
+              width 100%
+              height 100%
+          .good
+            width 100%
+            .newItemDesc
+              width 100%
+              font-size 24px
+              line-height 35px
+              margin-top 10px
+            .price
+              color $mainColor
+              font-size 28px
+              padding 10px 0
+            .tag-wrap
+              width 54px
+              height 30px
+              text-align center
+              line-height 30px
+              border 1px solid $mainColor
+              span
+                color $mainColor
+                font-size 18px
+  //
+  .sceneLight-shoppingGuide-module
+    width 100%
+    padding 0 30px
+    background-color #fff
+    box-sizing border-box
+    margin 20px 0
+    padding-bottom 26px
+    ul
+      width 100%
+      overflow hidden
+      li
+        float left
+        width 50%
+        margin-right 5px
+        padding 20px 0 0 20px
+        box-sizing border-box
+        background-color #f5f5f5
+        .title
+          >span
+            line-height 42px
+            &:nth-child(1)
+              font-size 32px
+            &:nth-child(2)
+              font-size 24px
+              color #7f7f7f
+        .pic
+          display flex
+          img
+           width 150px
+           height 150px
+        &:nth-child(2), &:nth-child(4)
+          margin-right 0
+          
+        
+  
+     
 
         
   
