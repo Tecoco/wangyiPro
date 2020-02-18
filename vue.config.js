@@ -24,5 +24,14 @@ module.exports = {
     
     devServer: {
         open: true,//默认自动打开浏览器
+        proxy: {
+          '/api': {
+            target: 'http://localhost:8087',
+            changeOrigin: true,
+            pathRewrite: {
+              "^/api": ''
+            }
+          },
+        }
     }
 };

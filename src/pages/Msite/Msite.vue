@@ -14,91 +14,33 @@
     </div>
     <!-- 导航 -->
     <div class="nav-list">
-      <ul>
-        <li class="active"><span>推荐</span></li>
-        <li><span>居家生活</span></li>
-        <li><span>居家生活</span></li>
-        <li><span>居家生活</span></li>
-        <li><span>居家生活</span></li>
-        <li><span>居家生活</span></li>
-        <li><span>居家生活</span></li>
+      <ul ref="navUl">
+        <li :class="{active: navIndex === index}" v-for="(navItem, index) in indexCateModule" :key="index"><span>{{navItem.name}}</span></li>
       </ul>
     </div>
     <!-- banner -->
-    <div class="banner">
       <div class="swiper-container">
         <div class="swiper-wrapper">
-          <div class="swiper-slide">
-            <img src="https://yanxuan.nosdn.127.net/6d7c87cf791a2cb01062ab72257a1cec.jpg?type=webp&imageView&quality=75&thumbnail=750x0" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://yanxuan.nosdn.127.net/701376163c509d740714fa16dee8ecc7.jpg?type=webp&imageView&quality=75&thumbnail=750x0" />
-          </div>
-          <div class="swiper-slide">
-            <img src="https://yanxuan.nosdn.127.net/100b633b1b237e0102458bbf4d851cb9.jpg?type=webp&imageView&quality=75&thumbnail=750x0" />
+          <div class="swiper-slide" v-for="(focusItem, index) in focusList" :key="index">
+            <img :src="focusItem.picUrl" />
           </div>
         </div>
         <!-- Add Pagination -->
         <div class="swiper-pagination"></div>
       </div>
-    </div>
     <!-- 服务政策 -->
     <ul class="service-policy">
-      <li>
-        <i></i>
-        <span>网易自营品牌</span>
-      </li>
-      <li>
-        <i></i>
-        <span>30天无忧退货</span>
-      </li>
-      <li>
-        <i></i>
-        <span>48小时快速退款</span>
+      <li v-for="(policyItem, index) in policyDescList" :key="index">
+        <img class="icon" :src="policyItem.icon" alt="">
+        <span>{{policyItem.desc}}</span>
       </li>
     </ul>
     <!-- 商品列表导航 -->
     <div class="shopList-nav">
       <ul>
-        <li>
+        <li v-for="(cateItem, index) in indexCateModule" :key="index">
           <img src="https://picsum.photos/60/60" alt="">
-          <span>新品首发</span>
-        </li>
-        <li>
-          <img src="https://picsum.photos/60/60" alt="">
-          <span>新品首发</span>
-        </li>
-        <li>
-          <img src="https://picsum.photos/60/60" alt="">
-          <span>新品首发</span>
-        </li>
-        <li>
-          <img src="https://picsum.photos/60/60" alt="">
-          <span>新品首发</span>
-        </li>
-        <li>
-          <img src="https://picsum.photos/60/60" alt="">
-          <span>新品首发</span>
-        </li>
-            <li>
-          <img src="https://picsum.photos/60/60" alt="">
-          <span>新品首发</span>
-        </li>
-        <li>
-          <img src="https://picsum.photos/60/60" alt="">
-          <span>新品首发</span>
-        </li>
-        <li>
-          <img src="https://picsum.photos/60/60" alt="">
-          <span>新品首发</span>
-        </li>
-        <li>
-          <img src="https://picsum.photos/60/60" alt="">
-          <span>新品首发</span>
-        </li>
-        <li>
-          <img src="https://picsum.photos/60/60" alt="">
-          <span>新品首发</span>
+          <span>{{cateItem.name}}</span>
         </li>
       </ul>
     </div>
@@ -132,11 +74,33 @@
           </div>
         </div>
         <div class="content-right">
-          <div class="module1"></div>
-          <div class="module2"></div>
+          <div class="module1">
+            <div class="small-title">
+              <span class="big-title">福利社</span><br>
+              <span class="sub-title">今日特价</span>
+            </div>
+            <div class="small-img">
+              <div class="discount">
+                <span class="price1">¥36</span><br>
+                <span class="price2"><del>¥39</del></span>
+              </div>
+              <img src="https://yanxuan-item.nosdn.127.net/858cc027d5dae682799a633cd331a29a.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+            </div>
+          </div>
+          <div class="module2">
+            <div class="small-title">
+              <span class="big-title">新人拼团</span><br>
+              <span class="sub-title">1元起包邮</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+    <!-- 类目热搜榜 -->
+    <div class="category-hotSell-module">
+
+    </div>
+
   </div>
 </template>
 
@@ -149,10 +113,19 @@ export default {
   data(){
     return {
       lefts: [], //获取所有右侧的li标对应累计的值
-      scrollY: 0 //内容滚动的距离
+      scrollY: 0, //内容滚动的距离
+      focusList: [],
+      policyDescList: [],
+      indexCateModule: []
     }
   },
-  mounted() {
+  async mounted() {
+    //发送ajax请求，获取首页对应的数据
+    let indexDatas = await this.$API.getIndexData();
+    const {focusList, policyDescList, indexCateModule} = indexDatas;
+    this.focusList = focusList;
+    this.policyDescList = policyDescList;
+    this.indexCateModule = indexCateModule;
     this.$nextTick(() => {
       //创建Swiper实例对象
       new Swiper(".swiper-container", {
@@ -177,6 +150,19 @@ export default {
         this.scrollX = Math.abs(x);
       });
     });
+  },
+  computed: {
+    //计算左侧导航对应的下标值，来确定高亮显示位置
+    navIndex(){
+      const {lefts, scrollX} = this;
+      
+      let index = lefts.findIndex((left, index)=> (scrollX >= lefts[index] && scrollX < lefts[index+1]));
+      if(this.navListScroll && this.index !== index){
+        this.index = index;
+        this.navListScroll.scrollToElement(this.$refs.navUl.children[index], 1000);
+      }
+      return index;
+    }
   }
 };
 </script>
@@ -259,47 +245,44 @@ export default {
               height 4px
               background-color $mainColor
   //轮播图
-  .banner 
-  	width 100%
-    margin-top 45px
+  .swiper-container 
+    width 100%
     height 370px
-
-    .swiper-container 
+    .swiper-wrapper
       width 100%
       height 100%
-
-      .swiper-wrapper 
+      .swiper-slide
         width 100%
         height 100%
-
-        .swiper-slide 
-          display flex
-          justify-content center
-          align-items flex-start
-          flex-wrap wrap
+        >img 
+          display inline-block
+          width 100%
           height 100%
 
-			img 
-				display inline-block
-				width 100%
-				height 100%
-
-      /* 深度选择器的使用 */
-      /deep/.swiper-pagination 
-        >span.swiper-pagination-bullet-active 
-          background red
+    /* 深度选择器的使用 */
+    /deep/.swiper-pagination 
+      >span.swiper-pagination-bullet-active 
+        background-color $mainColor
 
   //服务政策
   .service-policy
     width 100%
     height 72px
+    padding 0 30px
+    background-color #fff
+    box-sizing border-box
     display flex
     li
+      display flex
       width 33.3333%
       height 100%
       text-align center
       line-height 72px
-      background-color #fff
+      .icon
+        width 32px
+        height 32px
+        vertical-align center 
+        margin 20px 5px 0
   //商品列表导航
   .shopList-nav
     width 100%
@@ -350,10 +333,10 @@ export default {
   //新人专享
   .freshman-module
     width 100%
-    padding 0 30px
+    padding 0 30px 30px 30px
     box-sizing border-box
     background-color #fff
-    margin-top 20px
+    margin 20px 0 30px 0
     //标题
     .module-title
       width 100%
@@ -408,7 +391,62 @@ export default {
             
       //右边内容
       .content-right
-        background-color #666
+        >div
+          width 100%
+          height 215px
+          border-radius 5px
+          box-sizing border-box
+          overflow hidden
+        .module1,.module2
+          position relative
+          padding 20px 0 0 30px
+          margin-bottom 5px
+          background-color #fbe2d3
+          .small-title
+            span 
+              line-height 40px
+            .big-title
+              font-size 32px
+            .sub-title
+              font-size 20px
+          .small-img
+            position absolute
+            right 0
+            top 0
+            width 200px
+            height 200px
+            padding-top 20px
+            .discount
+              width 80px
+              height 80px
+              background-color #f6a447
+              border-radius 50%
+              position absolute
+              right 30px
+              top 15px
+              z-index 99
+              >span 
+                position absolute
+                left 20px
+                color #fff
+              .price1
+                top 20px
+              .price2
+                top 40px
+            img 
+              width 200px
+              height 200px
+        .module2
+          background-color #ffecc2
+          .sub-title
+            background-color rgba(0,0,0,0.2)
+            border-radius 5px
+            color #fff
+            padding 0 8px
+
+  //类目热搜榜
+  // .category-hotSell-module
+
         
   
 </style>
