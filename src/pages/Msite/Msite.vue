@@ -1,6 +1,6 @@
 <template>
   <div id="msite">
-    <div id="target"></div>
+    <!-- <div id="target"></div> -->
     <!-- 固定顶部的容器 -->
     <div class="fixed-header">
       <!-- 头部 -->
@@ -11,19 +11,24 @@
         />
         <div class="searchInput">
           <i class="iconfont icon-sousuo"></i>
-          <input class="placeholder" type="text" placeholder="搜索商品, 共20868款好物" />
+          <input @focus="handleFocus" class="placeholder" type="text" placeholder="搜索商品, 共20868款好物" />
         </div>
         <div class="btn-login">登录</div>
       </div>
       <!-- 导航 -->
       <div class="nav-list">
         <ul>
-          <li  @click="changeNavIndex(index)" :class="{active: navIndex === index}" v-for="(navItem, index) in indexCateModule" :key="index"><span>{{navItem.name}}</span></li>
+          <li
+            @click="changeNavIndex(index)"
+            :class="{active: navIndex === index}"
+            v-for="(navItem, index) in indexCateModule"
+            :key="index"
+          >
+            <span>{{navItem.name}}</span>
+          </li>
         </ul>
       </div>
-     
     </div>
-
     <!-- 箭头包裹容器 -->
     
       <div class="arrow-wrap" @click="handleMask">
@@ -52,15 +57,15 @@
       <div class="mask-bottom" @click="isShowMask=false, toggleArrow=false"></div>
     </div>
     <!-- banner -->
-      <div class="swiper-container">
-        <div class="swiper-wrapper">
-          <div class="swiper-slide" v-for="(focusItem, index) in focusList" :key="index">
-            <img :src="focusItem.picUrl" />
-          </div>
+    <div class="swiper-container">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide" v-for="(focusItem, index) in focusList" :key="index">
+          <img :src="focusItem.picUrl" />
         </div>
-        <!-- Add Pagination -->
-        <div class="swiper-pagination"></div>
       </div>
+      <!-- Add Pagination -->
+      <div class="swiper-pagination"></div>
+    </div>
     <!-- 服务政策 -->
     <ul class="service-policy">
       <li v-for="(policyItem, index) in policyDescList" :key="index">
@@ -137,6 +142,7 @@
       </div>
     </div>
     <!-- 类目热搜榜 -->
+    <!-- <IndexHotSell :categoryList="categoryList" /> -->
     <div class="category-hotSell-module">
       <div class="hotSell-module-title"><span>类目热销榜</span></div>
       <div class="hotSell-module-content">
@@ -249,91 +255,102 @@
 <script type="text/ecmascript-6">
 //引入BetterScroll
 import BScroll from 'better-scroll'
+//引入Swiper
 import Swiper from "swiper";
 import "swiper/css/swiper.min.css";
+import { mapState } from "vuex";
+// import IndexHotSell from '../../components/IndexHotSell/IndexHotSell';
+
 export default {
+  // components: {IndexHotSell},
   data(){
     return {
       isShowGoTop: false, //标识回到顶部的按钮是否显示
-      scrollToTop: '',
+      scrollToTop: '',  //标识滚动的位置
       toggleArrow: false, //标示是否切换箭头状态
-      // roateVaule: 45,
       isShowMask: false, //标识是否显示遮罩层
-      navIndex: 0,
-      focusList: [],
-      policyDescList: [],
-      indexCateModule: [],
-      kingKongList: [],
-      categoryList: {},
-      flashSaleItemList: [],
-      newItemList: [],
-      sceneLightShoppingGuideModule: []
+      navIndex: 0 //标识导航的下标值
     }
   },
-  async mounted() {
+  mounted() {
     //发送ajax请求，获取首页对应的数据
-    let indexDatas = await this.$API.getIndexData();
-    const {focusList, policyDescList, indexCateModule, kingKongModule, categoryHotSellModule, flashSaleModule, newItemList, sceneLightShoppingGuideModule} = indexDatas;
-    this.focusList = focusList;
-    this.policyDescList = policyDescList;
-    this.indexCateModule = indexCateModule;
-    this.kingKongList = kingKongModule.kingKongList;
-    this.categoryList = categoryHotSellModule.categoryList.splice(2);
-    this.flashSaleItemList = flashSaleModule.itemList;
-    this.sceneLightShoppingGuideModule = sceneLightShoppingGuideModule;
-    this.newItemList = newItemList.splice(0, 6);
+    this.$store.dispatch("getIndexDataAction");
     //在mounted()方法里监听mousewheel
     window.addEventListener('scroll',this.handleScrollGoTop,false);
-    //
+    //将回调延迟到下次 DOM 更新循环之后执行。
     this.$nextTick(() => {
-      //创建Swiper实例对象
-      new Swiper(".swiper-container", {
-        loop: true,
-        //分页器
-        pagination: {
-          el: '.swiper-pagination'
-        },
-      });
       //创建BScroll实例对象
       new BScroll('.nav-list', {
         scrollX: true,
         probeType: 2,
         click: true
       });
-
     });
-    //
-    // if (this.$refs.title.scrollHeight > this.$refs.title.offsetHeight) {
-    //   this.$refs.title.style.height = 72 + "px";
-    //   //正好是行高的两倍,也就是两行文本所需的高度
-    // }
   },
   methods: {
+    //处理导航下标值
     changeNavIndex(index){
       this.navIndex = index;
     },
+
     //点击箭头出现遮罩层的事件回调处理
     handleMask(){
       this.toggleArrow = !this.toggleArrow;
       // this.roateVaule = 45;
       this.isShowMask = !this.isShowMask;
     },
+
     //滚轮滑动事件处理
     handleScrollGoTop(){
       this.scrollToTop = document.documentElement.scrollTop || document.body.scrollTop;
       let browserHeight = window.outerHeight;
       this.isShowGoTop = this.scrollToTop >= browserHeight ? true : false;
     },
+
     //处理回到顶部
     handleGoTop(){
-      // document.documentElement.scrollTop = '';
-      target.scrollIntoView();
+      document.documentElement.scrollTop = '';
+      // target.scrollIntoView();
+    },
+
+    //搜索获取焦点
+    handleFocus(){
+      console.log('获取焦点了');
     }
     
   },
+  computed: {
+    ...mapState({
+      focusList: state => state.focusList,
+      policyDescList: state => state.policyDescList,
+      indexCateModule: state => state.indexCateModule,
+      kingKongList: state => state.kingKongList, //商品列表导航
+      categoryList: state => state.categoryList, //类目热搜榜
+      flashSaleItemList: state => state.flashSaleItemList,
+      sceneLightShoppingGuideModule: state => state.sceneLightShoppingGuideModule,
+      newItemList: state => state.newItemList
+    })
+  },
   destroyed () {
+    // 参数不对吧
     window.removeEventListener('scroll', this.scrollToTop); 
+  },
+  watch: {
+    indexCateModule(){
+        this.$nextTick(() => {
+        //创建Swiper实例对象
+        new Swiper(".swiper-container", {
+          loop: true,
+          //分页器
+          pagination: {
+            el: '.swiper-pagination'
+          },
+        });
+      });
+    }
   }
+
+
 };
 </script>
 

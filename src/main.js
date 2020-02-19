@@ -2,6 +2,8 @@ import Vue from 'vue'
 import 'lib-flexible/flexible'
 // import {Button} from 'mint-ui'
 import router from './router'
+import store from './store'
+
 import App from './App.vue'
 import * as API from './api'
 
@@ -15,5 +17,6 @@ new Vue({
   el: '#app',
   render: h => h(App),
   /* 安装路由器 */
-  router
+  router,
+  store
 });

@@ -1,0 +1,1 @@
+export const SAVE_INDEX_ALLDATA = 'save_index_alldata'; //保存首页所有数据

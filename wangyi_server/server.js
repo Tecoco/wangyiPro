@@ -11,7 +11,10 @@ let indexData = require('./datas');
 // console.log('首页数据====', indexData);
 
 router.get('/getIndex', (ctx, next) => {
-  ctx.body = indexData;
+  ctx.body = {
+    code: 0,
+    data: indexData
+  };
 });
 
 //安装路由器，声明使用中间件
