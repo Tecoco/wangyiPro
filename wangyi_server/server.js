@@ -8,7 +8,7 @@ const router = new KoaRouter();
 
 
 let indexData = require('./datas');
-console.log('首页数据====', indexData);
+// console.log('首页数据====', indexData);
 
 router.get('/getIndex', (ctx, next) => {
   ctx.body = indexData;

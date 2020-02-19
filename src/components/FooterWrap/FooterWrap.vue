@@ -5,19 +5,19 @@
         <span>首页</span>
       </div>
       <div :class="{active: $route.path === '/cateList'}" @click="navToggle('/cateList')" class="navItem">
-        <i class="iconfont icon-sousuo"></i>
+        <i class="iconfont icon-fenlei"></i>
         <span>分类</span>
       </div>
       <div :class="{active: $route.path === '/topic'}" @click="navToggle('/topic')" class="navItem">
-        <i class="iconfont icon-dingdan"></i>
+        <i class="iconfont icon-zhaopian-"></i>
         <span>值得买</span>
       </div>
       <div :class="{active: $route.path === '/cart'}" @click="navToggle('/cart')" class="navItem">
-        <i class="iconfont icon-wode"></i>
+        <i class="iconfont icon-gouwuche"></i>
         <span>购物车</span>
       </div>
       <div :class="{active: $route.path === '/profile'}" @click="navToggle('/profile')" class="navItem">
-        <i class="iconfont icon-wode"></i>
+        <i class="iconfont icon-geren"></i>
         <span>个人</span>
       </div>
   </div>
@@ -48,7 +48,7 @@
   width 100%
   height 98px
   background-color #f2f2f2
-  
+  z-index 3
   /* 导航的每一项 */
   .navItem
     display flex

@@ -1,22 +1,55 @@
 <template>
   <div id="msite">
-    <!-- 头部 -->
-    <div class="header-search-login">
-      <img
-        class="logo"
-        src="https://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png"
-      />
-      <div class="searchInput">
-        <i class="iconfont icon-sousuo"></i>
-        <input class="placeholder" type="text" placeholder="搜索商品" />
+    <div id="target"></div>
+    <!-- 固定顶部的容器 -->
+    <div class="fixed-header">
+      <!-- 头部 -->
+      <div class="header-search-login">
+        <img
+          class="logo"
+          src="https://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png"
+        />
+        <div class="searchInput">
+          <i class="iconfont icon-sousuo"></i>
+          <input class="placeholder" type="text" placeholder="搜索商品, 共20868款好物" />
+        </div>
+        <div class="btn-login">登录</div>
       </div>
-      <div class="btn-login">登录</div>
+      <!-- 导航 -->
+      <div class="nav-list">
+        <ul>
+          <li  @click="changeNavIndex(index)" :class="{active: navIndex === index}" v-for="(navItem, index) in indexCateModule" :key="index"><span>{{navItem.name}}</span></li>
+        </ul>
+      </div>
+     
     </div>
-    <!-- 导航 -->
-    <div class="nav-list">
-      <ul ref="navUl">
-        <li :class="{active: navIndex === index}" v-for="(navItem, index) in indexCateModule" :key="index"><span>{{navItem.name}}</span></li>
-      </ul>
+
+    <!-- 箭头包裹容器 -->
+    
+      <div class="arrow-wrap" @click="handleMask">
+        <i class="iconfont" :class="toggleArrow ? 'icon-jiantoushang' : 'icon-icon_arrow_bottom'"></i>
+      </div>
+    
+    <!-- 礼物 -->
+    <div class="user-gift"></div>
+    <!-- 回到顶部 -->
+    <transition name="fade">
+      <div class="go-top" v-show="isShowGoTop" @click="handleGoTop"></div>
+    </transition>
+    <!-- 遮罩层容器 :style="{'display': isShowMask?'block':'none'}"-->
+    <div class="mask-wrap" v-show="isShowMask">
+      <div class="mask-top" @click="isShowMask=true">
+        <div class="nav-title">
+          全部频道
+        </div>
+        <div class="more-cate">
+          <ul class="cate-list">
+            <li  @click="changeNavIndex(index)" :class="{active: navIndex === index}" v-for="(navItem, index) in indexCateModule" :key="index"><span>{{navItem.name}}</span></li>
+          </ul>
+        </div>
+      </div>
+      <!-- toggleIsShowMask -->
+      <div class="mask-bottom" @click="isShowMask=false, toggleArrow=false"></div>
     </div>
     <!-- banner -->
       <div class="swiper-container">
@@ -47,6 +80,13 @@
     <!-- 促销模块 -->
     <div class="promotion-module">
       <div class="floor-top">
+        <div class="prom-good">
+          <img src="https://yanxuan-item.nosdn.127.net/51348ec7731f5ed5c4bb9e0bed88717c.png?imageView&thumbnail=168x0&quality=75" alt="">
+          <div class="price-wrap">
+            <span>￥15.9</span>
+            <span><del>￥17.9</del></span>
+          </div>
+        </div>
         <img src="https://yanxuan.nosdn.127.net/5db28c137605ea7576c986e9c285e1c6.png?quality=75&type=webp&imageView&thumbnail=750x0" alt="">
       </div>
       <div class="floor-first">
@@ -98,7 +138,7 @@
     </div>
     <!-- 类目热搜榜 -->
     <div class="category-hotSell-module">
-      <div class="hotSell-module-title"><span>{{categoryHotSellModule.title}}</span></div>
+      <div class="hotSell-module-title"><span>类目热销榜</span></div>
       <div class="hotSell-module-content">
         <div class="content-top">
           <div class="content-top-left">
@@ -120,55 +160,12 @@
         </div>
         <div class="content-bottom">
           <ul>
-            <li>
-              <div class="title"><span>居家生活榜</span></div>
+            <li v-for="(categoryItem, index) in categoryList" :key="index">
+              <div class="title"><span>{{categoryItem.categoryName}}</span></div>
               <div class="img-wrap">
-               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
+               <img :src="categoryItem.showPicUrl" alt="">
               </div>
             </li>
-            <li>
-              <div class="title"><span>居家生活榜</span></div>
-              <div class="img-wrap">
-               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
-              </div>
-            </li>
-            <li>
-              <div class="title"><span>居家生活榜</span></div>
-              <div class="img-wrap">
-               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
-              </div>
-            </li>
-            <li>
-              <div class="title"><span>居家生活榜</span></div>
-              <div class="img-wrap">
-               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
-              </div>
-            </li>
-            <li>
-              <div class="title"><span>居家生活榜</span></div>
-              <div class="img-wrap">
-               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
-              </div>
-            </li>
-            <li>
-              <div class="title"><span>居家生活榜</span></div>
-              <div class="img-wrap">
-               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
-              </div>
-            </li>
-            <li>
-              <div class="title"><span>居家生活榜</span></div>
-              <div class="img-wrap">
-               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
-              </div>
-            </li>
-            <li>
-              <div class="title"><span>居家生活榜</span></div>
-              <div class="img-wrap">
-               <img src="https://yanxuan-item.nosdn.127.net/93a20b799b978c1b3e800ce3f0e16842.png?quality=75&type=webp&imageView&thumbnail=200x200" alt="">
-              </div>
-            </li>
-           
           </ul>
         </div>
       </div>
@@ -188,50 +185,13 @@
       </div>
       <div class="flashSale-content">
         <ul>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
+          <li v-for="(flashSaleItem, index) in flashSaleItemList" :key="index">
+            <div class="img-wrap"><img :src="flashSaleItem.picUrl" alt=""></div>
             <div class="price">
-              <span>￥290</span>
-              <span><del>￥330</del></span>
+              <span>￥{{flashSaleItem.activityPrice}}</span>
+              <span><del>￥{{flashSaleItem.originPrice}}</del></span>
             </div>
           </li>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
-            <div class="price">
-              <span>￥290</span>
-              <span><del>￥330</del></span>
-            </div>
-          </li>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
-            <div class="price">
-              <span>￥290</span>
-              <span><del>￥330</del></span>
-            </div>
-          </li>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
-            <div class="price">
-              <span>￥290</span>
-              <span><del>￥330</del></span>
-            </div>
-          </li>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
-            <div class="price">
-              <span>￥290</span>
-              <span><del>￥330</del></span>
-            </div>
-          </li>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/86a517ee37b94e00fcddb0bfd50fc433.png?quality=75&type=webp&imageView&thumbnail=216x216" alt=""></div>
-            <div class="price">
-              <span>￥290</span>
-              <span><del>￥330</del></span>
-            </div>
-          </li>
-         
-          
         </ul>
       </div>
     </div>
@@ -243,52 +203,12 @@
       </div>
       <div class="newItem-content">
         <ul>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
+          <li v-for="(newItem, index) in newItemList" :key="index">
+            <div class="img-wrap"><img :src="newItem.primaryPicUrl" alt=""></div>
             <div class="good">
-              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
-              <div class="price"><span>￥59</span></div>
-              <div class="tag-wrap"><span>特价</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <div class="good">
-              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
-              <div class="price"><span>￥59</span></div>
-              <div class="tag-wrap"><span>特价</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <div class="good">
-              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
-              <div class="price"><span>￥59</span></div>
-              <div class="tag-wrap"><span>特价</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <div class="good">
-              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
-              <div class="price"><span>￥59</span></div>
-              <div class="tag-wrap"><span>特价</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <div class="good">
-              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
-              <div class="price"><span>￥59</span></div>
-              <div class="tag-wrap"><span>特价</span></div>
-            </div>
-          </li>
-          <li>
-            <div class="img-wrap"><img src="https://yanxuan-item.nosdn.127.net/0fd9f9e40f287ecfe3b54aaafda914f6.png?type=webp&imageView&quality=65&thumbnail=330x330" alt=""></div>
-            <div class="good">
-              <div class="newItemDesc"><span>赏味正当时，春见耙耙柑 5斤</span></div>
-              <div class="price"><span>￥59</span></div>
-              <div class="tag-wrap"><span>特价</span></div>
+              <div ref="title" class="newItemDesc"><span>{{newItem.name}}</span></div>
+              <div class="price"><span>￥{{newItem.retailPrice}}</span></div>
+              <div class="tag-wrap"><span>{{newItem.itemTagList[0].name}}</span></div>
             </div>
           </li>
         </ul>
@@ -297,49 +217,32 @@
     <!--  -->
     <div class="sceneLight-shoppingGuide-module">
       <ul>
-        <li>
+        <li v-for="(shoppingItem, index) in sceneLightShoppingGuideModule" :key="index">
           <div class="title">
-            <span>断货补单王</span><br>
-            <span>紧急补仓疯抢中</span>
+            <span>{{shoppingItem.styleItem.title}}</span><br>
+            <span>{{shoppingItem.styleItem.desc}}</span>
           </div>
           <div class="pic">
-            <img src="https://yanxuan-item.nosdn.127.net/5e818e36e0cfd0bb474c57f27e76b46d.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
-            <img src="https://yanxuan-item.nosdn.127.net/445689c4faa55f8186c500e68bff73d6.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
-          </div>
-        </li>
-         <li>
-          <div class="title">
-            <span>断货补单王</span><br>
-            <span>紧急补仓疯抢中</span>
-          </div>
-          <div class="pic">
-            <img src="https://yanxuan-item.nosdn.127.net/5e818e36e0cfd0bb474c57f27e76b46d.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
-            <img src="https://yanxuan-item.nosdn.127.net/445689c4faa55f8186c500e68bff73d6.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
-          </div>
-        </li>
-         <li>
-          <div class="title">
-            <span>断货补单王</span><br>
-            <span>紧急补仓疯抢中</span>
-          </div>
-          <div class="pic">
-            <img src="https://yanxuan-item.nosdn.127.net/5e818e36e0cfd0bb474c57f27e76b46d.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
-            <img src="https://yanxuan-item.nosdn.127.net/445689c4faa55f8186c500e68bff73d6.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
-          </div>
-        </li>
-         <li>
-          <div class="title">
-            <span>断货补单王</span><br>
-            <span>紧急补仓疯抢中</span>
-          </div>
-          <div class="pic">
-            <img src="https://yanxuan-item.nosdn.127.net/5e818e36e0cfd0bb474c57f27e76b46d.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
-            <img src="https://yanxuan-item.nosdn.127.net/445689c4faa55f8186c500e68bff73d6.png?quality=75&type=webp&imageView&thumbnail=150x150" alt="">
+            <img :src="shoppingItem.styleItem.picUrlList[0]" alt="">
+            <img :src="shoppingItem.styleItem.picUrlList[1]" alt="">
           </div>
         </li>
       </ul>
     </div>
-
+    <!-- 底部 -->
+    <div class="footer-wrap">
+      <div class="footer-gow">
+        <div class="download">
+          <div><a href="###">下载APP</a></div>
+          <div><a href="###">电脑版</a></div>
+        </div>
+        <p class="copyright">
+          <span>网易公司版权所有 © 1997-</span>
+          <span>2020</span><br>
+          <span>食品经营许可证：JY13301080111719</span>
+        </p>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -351,61 +254,85 @@ import "swiper/css/swiper.min.css";
 export default {
   data(){
     return {
-      lefts: [], //获取所有右侧的li标对应累计的值
-      scrollY: 0, //内容滚动的距离
+      isShowGoTop: false, //标识回到顶部的按钮是否显示
+      scrollToTop: '',
+      toggleArrow: false, //标示是否切换箭头状态
+      // roateVaule: 45,
+      isShowMask: false, //标识是否显示遮罩层
+      navIndex: 0,
       focusList: [],
       policyDescList: [],
       indexCateModule: [],
       kingKongList: [],
-      categoryHotSellModule: {}
+      categoryList: {},
+      flashSaleItemList: [],
+      newItemList: [],
+      sceneLightShoppingGuideModule: []
     }
   },
   async mounted() {
     //发送ajax请求，获取首页对应的数据
     let indexDatas = await this.$API.getIndexData();
-    const {focusList, policyDescList, indexCateModule, kingKongModule, categoryHotSellModule} = indexDatas;
+    const {focusList, policyDescList, indexCateModule, kingKongModule, categoryHotSellModule, flashSaleModule, newItemList, sceneLightShoppingGuideModule} = indexDatas;
     this.focusList = focusList;
     this.policyDescList = policyDescList;
     this.indexCateModule = indexCateModule;
     this.kingKongList = kingKongModule.kingKongList;
-    this.categoryHotSellModule = categoryHotSellModule;
+    this.categoryList = categoryHotSellModule.categoryList.splice(2);
+    this.flashSaleItemList = flashSaleModule.itemList;
+    this.sceneLightShoppingGuideModule = sceneLightShoppingGuideModule;
+    this.newItemList = newItemList.splice(0, 6);
+    //在mounted()方法里监听mousewheel
+    window.addEventListener('scroll',this.handleScrollGoTop,false);
+    //
     this.$nextTick(() => {
       //创建Swiper实例对象
       new Swiper(".swiper-container", {
         loop: true,
         //分页器
         pagination: {
-          el: ".swiper-pagination"
-        }
+          el: '.swiper-pagination'
+        },
       });
       //创建BScroll实例对象
-      this.navListScroll = new BScroll('.nav-list', {
+      new BScroll('.nav-list', {
         scrollX: true,
         probeType: 2,
         click: true
       });
-      //绑定事件
-      this.navListScroll.on('scroll', ({x, y})=>{
-        this.scrollX = Math.abs(x);
-      });
 
-      this.navListScroll.on('scrollEnd', ({x, y})=>{
-        this.scrollX = Math.abs(x);
-      });
     });
+    //
+    // if (this.$refs.title.scrollHeight > this.$refs.title.offsetHeight) {
+    //   this.$refs.title.style.height = 72 + "px";
+    //   //正好是行高的两倍,也就是两行文本所需的高度
+    // }
   },
-  computed: {
-    //计算左侧导航对应的下标值，来确定高亮显示位置
-    navIndex(){
-      const {lefts, scrollX} = this;
-      
-      let index = lefts.findIndex((left, index)=> (scrollX >= lefts[index] && scrollX < lefts[index+1]));
-      if(this.navListScroll && this.index !== index){
-        this.index = index;
-        this.navListScroll.scrollToElement(this.$refs.navUl.children[index], 1000);
-      }
-      return index;
+  methods: {
+    changeNavIndex(index){
+      this.navIndex = index;
+    },
+    //点击箭头出现遮罩层的事件回调处理
+    handleMask(){
+      this.toggleArrow = !this.toggleArrow;
+      // this.roateVaule = 45;
+      this.isShowMask = !this.isShowMask;
+    },
+    //滚轮滑动事件处理
+    handleScrollGoTop(){
+      this.scrollToTop = document.documentElement.scrollTop || document.body.scrollTop;
+      let browserHeight = window.outerHeight;
+      this.isShowGoTop = this.scrollToTop >= browserHeight ? true : false;
+    },
+    //处理回到顶部
+    handleGoTop(){
+      // document.documentElement.scrollTop = '';
+      target.scrollIntoView();
     }
+    
+  },
+  destroyed () {
+    window.removeEventListener('scroll', this.scrollToTop); 
   }
 };
 </script>
@@ -414,81 +341,178 @@ export default {
 @import '../../common/stylus/mixins.styl';
 #msite 
   width 100%
-  height 6000px
+  margin-bottom 100px
   background-color #eee
-
-  // 头部搜索部分
-  .header-search-login 
-    display flex
+  overflow hidden 
+  //固定头部的容器
+  .fixed-header
+    position fixed
+    left 0
+    top 0
     width 100%
-    height 90px
-    padding 20px
-    box-sizing border-box
-    background-color #fff
-
-    .logo 
-      width 140px
-      height 40px
-      margin 10px 0 0 15px
-
-    .searchInput 
-      width 440px
-      height 60px
-      background #ededed
-      position relative
-      margin 0 15px
-      border-radius 10px
-
-      .iconfont 
-        font-size 30px
-        position absolute
-        left 10px
-        top 25%
-
-      input 
-        border-radius 10px
-        height 60px
-        width 390px
-        background #ededed
-        margin-left 50px
-
-    .btn-login 
-      width 74px
-      height 40px
-      line-height 40px
-      color #b4282d
-      text-align center
-      border 1px solid #b4282d
-      margin-top 10px
-
-  // 导航栏
-  .nav-list 
-    width 100%
-    height 60px
-    line-height 60px
-    font-size 28px
-    background-color #fff
-    ul
-      height 100%
+    z-index 99
+    // 头部搜索部分
+    .header-search-login 
       display flex
-      li
+      width 100%
+      height 90px
+      padding 20px
+      box-sizing border-box
+      background-color #fff
+
+      .logo 
+        width 140px
+        height 40px
+        margin 10px 0 0 15px
+
+      .searchInput 
+        width 440px
+        height 60px
+        background #ededed
         position relative
-        padding 0 16px
-        white-space nowrap
-        &.active
-          color $mainColor
-          span 
-            &::after
-              content ''
+        margin 0 15px
+        border-radius 10px
+
+        .iconfont 
+          font-size 30px
+          position absolute
+          left 10px
+          top 25%
+
+        input 
+          border-radius 10px
+          height 60px
+          width 390px
+          background #ededed
+          margin-left 50px
+
+      .btn-login 
+        width 74px
+        height 40px
+        line-height 40px
+        color #b4282d
+        text-align center
+        border 1px solid #b4282d
+        margin-top 10px
+
+    // 导航栏
+    .nav-list 
+      width 100%
+      height 60px
+      line-height 60px
+      font-size 28px
+      // overflow hidden
+      
+      background-color #fff
+      >ul
+        width 1580px
+        padding-left 30px
+        display flex
+        li
+          position relative
+          padding 0 16px
+          height 60px
+          padding 0 28px
+          white-space nowrap
+          &.active
+            color $mainColor
+            span 
+              &::after
+                content ''
+                display block
+                position absolute
+                left 0
+                bottom 0
+                width 100%
+                height 4px
+                background-color $mainColor
+  //箭头容器
+  .arrow-wrap
+    width 150px
+    height 60px
+    position fixed
+    top 90px
+    right 0
+    text-align center
+    line-height 60px      
+    color #999 
+    z-index 999 
+    background-image linear-gradient(to right, rgba(255,255,255,0) 1%, rgba(255,255,255,0.5) 4%, rgba(255,255,255,0.9) 25%, rgba(255,255,255,1) 30%, rgba(255,255,255,1) 40%)
+   
+  //礼物
+  .user-gift
+    width 112px
+    height 80px
+    position fixed
+    right 0
+    bottom 240px
+    z-index 5
+    background-image url('http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/wapNewUserEntry-b69d0624fd.png?imageView&type=webp')
+    background-size cover
+  //回到顶部
+  .go-top
+    width 82px
+    height 82px
+    position fixed
+    right 20px
+    bottom 120px
+    z-index 5
+    background-image url('http://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/goToTop-f502426678.png?imageView&type=webp')
+    background-size cover
+  .fade-enter-active, .fade-leave-active
+    transition opacity .5s
+  .fade-enter, .fade-leave-to
+    opacity 0
+  
+  //遮罩层容器
+  .mask-wrap
+    width 100%
+    height calc(100vh - 90px)
+    position fixed 
+    bottom 0
+    left 0
+    z-index 100
+    background-color rgba(0, 0, 0, 0.4) 
+    .mask-top
+      width 100%
+      .nav-title
+        width 100%
+        height 60px
+        line-height 60px
+        font-size 28px
+        padding-left 30px
+        box-sizing border-box
+        background-color #fff
+      .more-cate
+        padding-top 24px
+        width 100%
+        background-color #fff
+        .cate-list
+          width 100%
+          overflow hidden
+          li
+            float left 
+            width 150px
+            height 56px
+            line-height 56px
+            margin-left 30px
+            margin-bottom 40px
+            border 1px solid #ccc
+            &.active
+              color $mainColor
+              border 1px solid $mainColor
+            span
               display block
-              position absolute
-              left 0
-              bottom 0
               width 100%
-              height 4px
-              background-color $mainColor
-  //轮播图
+              height 100%
+              text-align center
+    .mask-bottom
+      width 100%
+      height 100%
+      // background-color red
+    //轮播图
   .swiper-container 
+    margin-top 150px
     width 100%
     height 370px
     .swiper-wrapper
@@ -501,11 +525,18 @@ export default {
           display inline-block
           width 100%
           height 100%
+    .swiper-pagination
+      position absolute
+      bottom 35px
 
     /* 深度选择器的使用 */
     /deep/.swiper-pagination 
-      >span.swiper-pagination-bullet-active 
-        background-color $mainColor
+      // >span.swiper-pagination-bullet-active 
+      //   background-color $mainColor
+      >span.swiper-pagination-bullet
+        width 40px
+        height 5px
+        background-color #fff
 
   //服务政策
   .service-policy
@@ -530,6 +561,7 @@ export default {
   .shopList-nav
     width 100%
     height 340px
+    padding-bottom 32px
     background-color #fff
     ul
       width 100%
@@ -553,8 +585,37 @@ export default {
     width 100%
     background-color #fff
     .floor-top, .floor-first
+      position relative
       img 
         width 100% 
+      .prom-good
+        overflow hidden
+        position absolute
+        left 75px
+        top 45px
+        width 168px
+        height 168px
+        >img
+          position absolute
+          left 0
+          top -10px
+        .price-wrap
+          position absolute
+          left 0
+          bottom 5px
+          width 152px
+          height 36px
+          text-align center
+          line-height 42px
+          background-color #F48F18
+          border-radius 20px
+          color #fff
+          padding 0 10px
+          span 
+            &:nth-child(1)
+              font-size 14px
+            &:nth-child(2)
+              font-size 10px  
     .floor-first, .floor-list
       padding 0 20px
       background-color #1674e3
@@ -668,7 +729,7 @@ export default {
               position absolute
               right 30px
               top 15px
-              z-index 99
+              z-index 1
               >span 
                 position absolute
                 left 20px
@@ -888,23 +949,30 @@ export default {
               font-size 24px
               line-height 35px
               margin-top 10px
+              height 66px
+              overflow hidden
+              text-overflow ellipsis
+              display -webkit-box
+              -webkit-line-clamp 2
+              -webkit-box-orient vertical
+              text-align justfiy 
             .price
               color $mainColor
               font-size 28px
               padding 10px 0
             .tag-wrap
-              width 54px
-              height 30px
+              float left
               text-align center
               line-height 30px
               border 1px solid $mainColor
               span
                 color $mainColor
-                font-size 18px
+                font-size 12px
+                padding 3px
   //
   .sceneLight-shoppingGuide-module
     width 100%
-    padding 0 30px
+    padding 10px 30px 0
     background-color #fff
     box-sizing border-box
     margin 20px 0
@@ -914,8 +982,9 @@ export default {
       overflow hidden
       li
         float left
-        width 50%
+        width 342px
         margin-right 5px
+        margin-bottom 5px
         padding 20px 0 0 20px
         box-sizing border-box
         background-color #f5f5f5
@@ -934,8 +1003,38 @@ export default {
            height 150px
         &:nth-child(2), &:nth-child(4)
           margin-right 0
-          
+  //底部
+  .footer-wrap
+    width 100%
+    height 244px
+    padding 54px 20px 30px
+    background-color #414141
+    box-sizing border-box
+    color #999
+    text-align center
+    font-size 24px
+    .download
+      width 100%
+      height 100%
+      margin-bottom 36px
+      >div
+        width 172px
+        height 62px
+        line-height 62px
+        display inline-block
+        border 1px solid #999
+        >a
+          disply block
+          width 100%
+          height 100%
+          color #fff
+      >div:nth-child(1)
+        margin-right 50px
         
+    .copyright
+      width 100%
+      line-height 35px
+      font-size 20px
   
      
 
