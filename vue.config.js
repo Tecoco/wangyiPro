@@ -25,11 +25,18 @@ module.exports = {
     devServer: {
         open: true,//默认自动打开浏览器
         proxy: {
-          '/api': {
+          '/api': { //匹配/api开头的请求
             target: 'http://localhost:8087',
-            changeOrigin: true,
+            changeOrigin: true, //默认false，是否需要改变原始主机头为目标URL
             pathRewrite: {
               "^/api": ''
+            }
+          },
+          '/myou': {
+            target: 'https://m.you.163.com',
+            changeOrigin: true,
+            pathRewrite: {
+              "^/myou": ''
             }
           },
         }

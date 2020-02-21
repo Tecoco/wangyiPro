@@ -1,5 +1,7 @@
 import {
-    SAVE_INDEX_ALLDATA
+    SAVE_INDEX_ALLDATA,
+    SAVE_SEARCH_DATA,
+    SAVE_CATE_LIST
 } from './mutations_types';
 
 export default {
@@ -23,6 +25,14 @@ export default {
         state.flashSaleItemList = flashSaleModule.itemList;
         state.sceneLightShoppingGuideModule = sceneLightShoppingGuideModule;
         state.newItemList = newItemList.splice(0, 6);
+    },
+    
+    [SAVE_SEARCH_DATA](state, searchAllData){
+      state.searchAllDataObj = searchAllData;
+    },
+
+    [SAVE_CATE_LIST](state, cateLists){
+        state.cateLists = cateLists;
     }
 
 }

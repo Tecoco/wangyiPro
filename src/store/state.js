@@ -7,5 +7,9 @@ export default {
     categoryList: {},
     flashSaleItemList: [],
     newItemList: [],
-    sceneLightShoppingGuideModule: []
+    sceneLightShoppingGuideModule: [],
+    //搜索的所有数据
+    searchAllDataObj: {},
+    //分类右侧内容数据
+    cateLists: []
 }

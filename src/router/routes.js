@@ -4,6 +4,7 @@ const CateList = ()=> import('../pages/CateList/CateList');
 const WorthBuy = ()=> import('../pages/WorthBuy/WorthBuy');
 const Cart = ()=> import('../pages/Cart/Cart');
 const Profile = ()=> import('../pages/Profile/Profile');
+const Search = ()=> import('../pages/Search/Search');
 
 export default [
     {
@@ -25,6 +26,10 @@ export default [
     {
         path: '/profile',
         component: Profile
+    },
+    {
+        path: '/search',
+        component: Search
     },
     {
         path: '',

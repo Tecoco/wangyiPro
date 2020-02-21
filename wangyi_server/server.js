@@ -8,12 +8,26 @@ const router = new KoaRouter();
 
 
 let indexData = require('./datas');
-// console.log('首页数据====', indexData);
-
 router.get('/getIndex', (ctx, next) => {
   ctx.body = {
     code: 0,
     data: indexData
+  };
+});
+
+let cateNavData = require('./datas/cateNavDatas.json');
+router.get('/getCateNavData', (ctx, next) => {
+  ctx.body = {
+    code: 0,
+    data: cateNavData
+  };
+});
+
+let cateListData = require('./datas/cateLists.json');
+router.get('/getCateListData', (ctx, next) => {
+  ctx.body = {
+    code: 0,
+    data: cateListData
   };
 });
 

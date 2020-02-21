@@ -269,12 +269,13 @@ export default {
       scrollToTop: '',  //标识滚动的位置
       toggleArrow: false, //标示是否切换箭头状态
       isShowMask: false, //标识是否显示遮罩层
-      navIndex: 0 //标识导航的下标值
+      navIndex: 0, //标识导航的下标值
     }
   },
-  mounted() {
+  async mounted() {
     //发送ajax请求，获取首页对应的数据
     this.$store.dispatch("getIndexDataAction");
+
     //在mounted()方法里监听mousewheel
     window.addEventListener('scroll',this.handleScrollGoTop,false);
     //将回调延迟到下次 DOM 更新循环之后执行。
@@ -315,7 +316,8 @@ export default {
 
     //搜索获取焦点
     handleFocus(){
-      console.log('获取焦点了');
+      //跳转页面
+      this.$router.push({path: 'search'});
     }
     
   },
@@ -333,7 +335,7 @@ export default {
   },
   destroyed () {
     // 参数不对吧
-    window.removeEventListener('scroll', this.scrollToTop); 
+    // window.removeEventListener('scroll', this.scrollToTop); 
   },
   watch: {
     indexCateModule(){
@@ -527,7 +529,7 @@ export default {
       width 100%
       height 100%
       // background-color red
-    //轮播图
+  //轮播图
   .swiper-container 
     margin-top 150px
     width 100%

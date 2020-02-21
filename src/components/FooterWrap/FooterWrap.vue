@@ -47,7 +47,7 @@
   bottom 0
   width 100%
   height 98px
-  background-color #f2f2f2
+  background-color #fff
   z-index 3
   /* 导航的每一项 */
   .navItem
