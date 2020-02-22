@@ -53,7 +53,7 @@
         </ul>
       </div>
     </div>
-    <LoginMode v-else/>
+    <LoginMode :isShowLogin="isShowLogin" v-else/>
   </div>
 </template>
 
@@ -65,6 +65,9 @@ import LoginMode from '../../components/LoginMode/LoginMode';
       return {
         isShowLogin: false
       }
+    },
+    mounted(){
+      
     },
     methods: {
      

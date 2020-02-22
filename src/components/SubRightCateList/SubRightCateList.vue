@@ -6,12 +6,12 @@
       </div>
       <div class="cate-list">
         <ul>
-          <!-- <li v-for="(cateItem, index) in cateLists[0].categoryList" :key="index">
+          <li v-for="(cateItem, index) in cateLists[0].categoryList" :key="index">
             <div class="cate-img">
               <img src="https://yanxuan.nosdn.127.net/c117ea2f1c4d978eb1f310d6d9ec3226.png?quality=75&type=webp&imageView&thumbnail=144x144" alt="">
             </div>
             <div class="cate-text">{{cateItem.name}}</div>
-          </li> -->
+          </li>
           
         </ul>
       </div>
@@ -32,7 +32,9 @@ export default {
     this.$store.dispatch('getCateListDataAction');
   },
   computed: {
-    cateLists: state => state.cateLists
+     ...mapState({
+       cateLists: state => state.cateLists
+    })
   }
 }
 </script>

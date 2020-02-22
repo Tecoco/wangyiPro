@@ -334,7 +334,6 @@ export default {
     })
   },
   destroyed () {
-    // 参数不对吧
     // window.removeEventListener('scroll', this.scrollToTop); 
   },
   watch: {
@@ -404,6 +403,7 @@ export default {
           width 390px
           background #ededed
           margin-left 50px
+          outline none
 
       .btn-login 
         width 74px

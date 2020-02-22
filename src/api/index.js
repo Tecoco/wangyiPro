@@ -12,6 +12,15 @@ export const getSearchData = ()=> myAxios({
     url: '/myou/xhr/search/init.json'
 });
 
+//关键字搜索接口
+export const getSearchKeyWords = (keywordPrefix)=> myAxios({
+    method: 'POST',
+    url: '/myou/xhr/search/searchAutoComplete.json',
+    data: {
+        keywordPrefix
+    }
+});
+
 //获取分类左侧导航数据
 export const getCateNavData = ()=> myAxios({
     url: '/api/getCateNavData'

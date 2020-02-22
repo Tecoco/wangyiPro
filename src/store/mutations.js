@@ -1,7 +1,8 @@
 import {
     SAVE_INDEX_ALLDATA,
     SAVE_SEARCH_DATA,
-    SAVE_CATE_LIST
+    SAVE_CATE_LIST,
+    SAVE_KEYWORD_LIST
 } from './mutations_types';
 
 export default {
@@ -29,6 +30,10 @@ export default {
     
     [SAVE_SEARCH_DATA](state, searchAllData){
       state.searchAllDataObj = searchAllData;
+    },
+
+    [SAVE_KEYWORD_LIST](state, searchKeyword){
+      state.SearchKeyWordsList = searchKeyword;
     },
 
     [SAVE_CATE_LIST](state, cateLists){

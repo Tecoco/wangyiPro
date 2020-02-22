@@ -49,7 +49,7 @@ import "swiper/css/swiper.min.css";
   export default {
     data(){
       return {
-        navList: []
+        navList: [],
       }
     },
     async mounted(){
