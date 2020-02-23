@@ -259,7 +259,6 @@ import BScroll from 'better-scroll'
 import Swiper from "swiper";
 import "swiper/css/swiper.min.css";
 import { mapState } from "vuex";
-// import IndexHotSell from '../../components/IndexHotSell/IndexHotSell';
 
 export default {
   // components: {IndexHotSell},
@@ -292,7 +291,7 @@ export default {
     //搜索获取焦点
     handleClickSkip(){
       //跳转页面
-      this.$router.push({path: '/search'});
+      this.$router.push({path: 'profile'});
     },
     
     //处理导航下标值
@@ -323,7 +322,12 @@ export default {
     //搜索获取焦点
     handleFocus(){
       //跳转页面
-      this.$router.push({path: 'search'});
+      // this.$router.push({path: 'search'});
+      this.$router.push({
+        path: 'search',
+        query: {from: 'msiteId'}
+      });
+      
     }
     
   },
@@ -555,7 +559,7 @@ export default {
       bottom 35px
 
     /* 深度选择器的使用 */
-    /deep/.swiper-pagination 
+    .swiper-pagination 
       // >span.swiper-pagination-bullet-active 
       //   background-color $mainColor
       >span.swiper-pagination-bullet

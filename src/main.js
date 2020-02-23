@@ -8,6 +8,15 @@ import App from './App.vue'
 import * as API from './api'
 import './veevalidate'
 import waterfall from "vue-waterfall2"
+//////
+//下面这段代码，解决在cateList页面刷新时，报错问题
+//Uncaught (in promise) NavigationDuplicated 
+import Router from 'vue-router'
+const routerPush = Router.prototype.push
+Router.prototype.push = function push(location) {
+  return routerPush.call(this, location).catch(error=> error)
+}
+//////
 
 Vue.use(waterfall);
 Vue.config.productionTip = false;

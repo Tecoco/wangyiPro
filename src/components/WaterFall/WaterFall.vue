@@ -36,7 +36,6 @@
   export default {
     data(){
         return {
-            // firstScreenList: [],
             lazyLoadList: [],
             col: 2,
             isLoading: false,
@@ -69,7 +68,7 @@
           this.page++;
           if(scrollData.scrollTop >= minScrollTop){
             let lazyLoadRes = await this.$API.getWaterFallLazyLoad(this.page, 3);
-              console.log('lazyLoadRes====', lazyLoadRes.data.result);
+              // console.log('lazyLoadRes====', lazyLoadRes.data.result);
             let lazyRes = lazyLoadRes.data.result.reduce((preArr, itemObj)=>{
               preArr.push(...itemObj.topics);
               // console.log('newArr====',preArr);

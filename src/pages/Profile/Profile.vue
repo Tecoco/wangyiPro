@@ -79,7 +79,10 @@ import LoginMode from '../../components/LoginMode/LoginMode';
      //搜索获取焦点
       handleClickSkip(){
         //跳转页面
-        this.$router.push({path: '/search'});
+        this.$router.push({
+          path: 'search',
+          query: {from: 'loginId'}
+        });
       }
     }
   }

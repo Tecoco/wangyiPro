@@ -4,7 +4,7 @@
       <div class="banner">
         <img src="https://yanxuan.nosdn.127.net/868844d3288f130c1aa808312dbbd1d8.png?quality=75&type=webp&imageView&thumbnail=0x196" alt="">
       </div>
-      <div class="cate-list">
+      <div class="cate-list" v-if="cateRightObj">
         <ul v-if="cateRightObj.categoryList">
           <li v-for="(cateItem, index) in cateRightObj.categoryList" :key="index">
             <div class="cate-img">

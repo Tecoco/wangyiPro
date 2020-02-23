@@ -94,7 +94,19 @@ import HistoryItem from "./HistoryItem/HistoryItem";
     methods: {
         //取消 事件回调处理
         handleCancel(){
+          // console.log(this.$route);
+          let id = this.$route.query.from;
+          if(id === 'cateId'){
+            this.$router.push({path: 'cateList'});
+          }else if(id === 'topicId'){
+            this.$router.push({path: 'topic'});
+          }else if(id === 'loginId'){
+            this.$router.push({path: 'profile'});
+          }else{
             this.$router.push({path: 'msite'});
+          }
+          
+            
         },
         //添加历史记录
         addHistoryData(){

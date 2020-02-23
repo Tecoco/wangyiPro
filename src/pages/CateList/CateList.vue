@@ -12,6 +12,7 @@
       <div class="left-wrap">
         <SubLeftCateList />
       </div>
+      <div class="middle-line"></div>
       <div class="right-wrap"><!-- 容器 -->
         <div class="right-content">
           <!-- <SubRightCateList :cateNavList="cateNavList"/> -->
@@ -31,7 +32,10 @@ import SubLeftCateList from './SubLeftCateList/SubLeftCateList'
       //搜索获取焦点
       handleFocus(){
         //跳转页面
-        this.$router.push({path: '/search'});
+        this.$router.push({
+          path: '/search',
+          query: {from: 'cateId'}
+        });
       }
     
     }
@@ -87,8 +91,13 @@ import SubLeftCateList from './SubLeftCateList/SubLeftCateList'
       height calc(100vh - 250px)
       margin 40px 0 30px 0
       overflow hidden
-      border-right 1px solid #eee
+      // border-right 1px solid #eee
       //navList
+    //中间修饰线条
+    .middle-line
+      width 2px
+      height calc(100vh)
+      background-color #eee
     //右侧
     .right-wrap
       width calc(100vw - 163px)
