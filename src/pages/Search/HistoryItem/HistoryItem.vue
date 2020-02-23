@@ -1,7 +1,9 @@
 <template>
-    <li>
-      <span>{{todo.keyWord}}</span>
-    </li>
+   <div id="history-wrap">
+      <li>
+        <span>{{todo.keyWord}}</span>
+      </li>
+   </div>
 </template>
 
 <script type="text/ecmascript-6">
@@ -14,5 +16,11 @@
 </script>
 
 <style lang="stylus">
+#history-wrap
+  li
+    max-width 275px
+    text-overflow ellipsis
+    overflow hidden
+    white-space nowrap
 
 </style>

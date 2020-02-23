@@ -7,7 +7,9 @@ import store from './store'
 import App from './App.vue'
 import * as API from './api'
 import './veevalidate'
+import waterfall from "vue-waterfall2"
 
+Vue.use(waterfall);
 Vue.config.productionTip = false;
 //js组件不需要注册，但css组件需要全局注册
 Vue.component(Field.name, Field);

@@ -4,7 +4,7 @@
         <i class="iconfont icon-shouye"></i>
         <span>首页</span>
       </div>
-      <div :class="{active: $route.path === '/cateList'}" @click="navToggle('/cateList')" class="navItem">
+      <div :class="{active: $route.path === '/cateList' || $route.path === `/cateList/cateId/${$route.params.id}`}" @click="navToggle('/cateList')" class="navItem">
         <i class="iconfont icon-fenlei"></i>
         <span>分类</span>
       </div>
@@ -41,7 +41,7 @@
 /* 底部导航 */
 #footerWrap
   display flex
-  top-border-1px(#eee)
+  border-top 1px solid #d9d9d9
   position fixed
   left 0
   bottom 0

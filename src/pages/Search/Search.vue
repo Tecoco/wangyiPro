@@ -27,7 +27,7 @@
       <div class="history-record">
         <div class="nav-title">
           <span>历史记录</span>
-          <i class="iconfont icon-lajitong-copy"></i>
+          <i @click="handleClear" class="iconfont icon-lajitong-copy"></i>
         </div>
         <div class="more-cate">
           <ul class="cate-list" >
@@ -108,10 +108,8 @@ import HistoryItem from "./HistoryItem/HistoryItem";
             };
             //
             let todoList = this.todos;
-            // console.log('之前', todoList)
             // if(todoList.length){
             //    todoList = todoList.filter(item => item.keyWord !== todo.keyWord);
-            //    console.log('之后', todoList)
             // }
             // let res = todoList.filter(item => item.keyWord !== todo.keyWord);
             // console.log('=====',res);
@@ -120,6 +118,10 @@ import HistoryItem from "./HistoryItem/HistoryItem";
            
             // 清除输入
             this.keyWord = '';
+        },
+        //清空历史记录
+        handleClear(){
+          this.todos = [];
         }
     },
     computed: {

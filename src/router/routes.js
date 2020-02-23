@@ -5,6 +5,7 @@ const WorthBuy = ()=> import('../pages/WorthBuy/WorthBuy');
 const Cart = ()=> import('../pages/Cart/Cart');
 const Profile = ()=> import('../pages/Profile/Profile');
 const Search = ()=> import('../pages/Search/Search');
+const SubRightCateList = ()=> import('../pages/CateList/SubRightCateList/SubRightCateList');
 
 export default [
     {
@@ -14,6 +15,12 @@ export default [
     {
         path: '/cateList',
         component: CateList,
+        children: [
+            {
+                path: '/cateList/cateId/:id',
+                component: SubRightCateList,
+            }
+        ]
     },
     {
         path: '/topic',

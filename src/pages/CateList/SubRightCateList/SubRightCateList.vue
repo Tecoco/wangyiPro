@@ -5,14 +5,21 @@
         <img src="https://yanxuan.nosdn.127.net/868844d3288f130c1aa808312dbbd1d8.png?quality=75&type=webp&imageView&thumbnail=0x196" alt="">
       </div>
       <div class="cate-list">
-        <ul>
-          <li v-for="(cateItem, index) in cateLists[0].categoryList" :key="index">
+        <ul v-if="cateRightObj.categoryList">
+          <li v-for="(cateItem, index) in cateRightObj.categoryList" :key="index">
             <div class="cate-img">
-              <img src="https://yanxuan.nosdn.127.net/c117ea2f1c4d978eb1f310d6d9ec3226.png?quality=75&type=webp&imageView&thumbnail=144x144" alt="">
+              <img :src="cateItem.wapBannerUrl" alt="">
             </div>
             <div class="cate-text">{{cateItem.name}}</div>
           </li>
-          
+        </ul>
+        <ul v-if="cateRightObj.subCateList">
+          <li v-for="(cateItem, index) in cateRightObj.subCateList" :key="index">
+              <div class="cate-img">
+                <img :src="cateItem.wapBannerUrl" alt="">
+              </div>
+              <div class="cate-text">{{cateItem.name}}</div>
+          </li>
         </ul>
       </div>
     </div>
@@ -20,21 +27,24 @@
 </template>
 
 <script type="text/ecmascript-6">
-import {mapState} from 'vuex'
 
 export default {
-  props: ['cateNavList'],
   data(){
     return {
+      cateRightObj: {},
+      cateRightList: []
     }
   },
-  mounted(){
-    this.$store.dispatch('getCateListDataAction');
+  async mounted(){
+    let res = await this.$API.getCateListData();
+    this.cateRightList = res.data;
+    //根据路由参数查询对应的对象 filter find
+    this.cateRightObj = this.cateRightList.find(item => item.id === this.$route.params.id*1);
   },
-  computed: {
-     ...mapState({
-       cateLists: state => state.cateLists
-    })
+  watch: {
+    $route(){
+      this.cateRightObj = this.cateRightList.find(item => item.id === this.$route.params.id*1)
+    }
   }
 }
 </script>
@@ -63,7 +73,7 @@ export default {
           height 216px
           margin-right 47px
           float left
-          &:nth-child(3), &:nth-child(6)
+          &:nth-child(3n)
             margin-right 0
           .cate-img
             width 100%

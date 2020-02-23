@@ -13,5 +13,5 @@ export default {
     //搜索关键字
     SearchKeyWordsList: [],
     //分类右侧内容数据
-    cateLists: []
+    // cateLists: []
 }

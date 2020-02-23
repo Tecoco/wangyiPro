@@ -39,3 +39,16 @@ export const getTopicNavData = ()=> myAxios({
     url: '/myou/topic/v1/know/navWap.json'
 });
 
+//获取瀑布流-首屏数据
+export const getWaterFallData = ()=> myAxios({
+    url: '/myou/topic/v1/find/recManual.json'
+});
+
+//瀑布流-触底加载接口
+export const getWaterFallLazyLoad = (page, size)=> myAxios({
+    url: '/myou/topic/v1/find/recAuto.json',
+    params: {
+        page,
+        size
+    }
+});

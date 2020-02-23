@@ -10,7 +10,7 @@
         <img src="https://yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/indexLogo-a90bdaae6b.png" alt="" />
       </div>
       <div class="right">
-        <i class="iconfont icon-sousuo1"></i>
+        <i @click="handleClickSkip" class="iconfont icon-sousuo1"></i>
         <i class="iconfont icon-gouwuche"></i>
       </div>
     </div>
@@ -20,11 +20,11 @@
           <img src="https://yanxuan.nosdn.127.net/39c5e4583753d4c3cb868a64c2c109ea.png" alt="">
         </div>
         <div class="btn-wrap">
-          <div class="btn1 active" @click="isShowLogin=true">
+          <div class="btn1 active" @click="handleLogin(1)">
             <i class="iconfont icon-shouji"></i>
             <span>手机快捷登录</span>
           </div>
-          <div class="btn2" @click="isShowLogin=true">
+          <div class="btn2" @click="handleLogin(2)">
             <i class="iconfont icon-icon"></i>
             <span>邮箱账号登录</span>
           </div>
@@ -53,7 +53,7 @@
         </ul>
       </div>
     </div>
-    <LoginMode :isShowLogin="isShowLogin" v-else/>
+    <LoginMode @func="getMsgFormSon" :modeFlag="modeFlag" v-else/>
   </div>
 </template>
 
@@ -63,14 +63,24 @@ import LoginMode from '../../components/LoginMode/LoginMode';
     components: {LoginMode},
     data(){
       return {
-        isShowLogin: false
+        isShowLogin: false,
+        modeFlag: 1
       }
     },
-    mounted(){
-      
-    },
     methods: {
-     
+      handleLogin(flag){
+        this.isShowLogin = true;
+        this.modeFlag =(flag === 1) ? flag : flag;
+      },
+     //获取子组件传递给父组件的数据
+      getMsgFormSon(data){
+        this.isShowLogin = data;
+      },
+     //搜索获取焦点
+      handleClickSkip(){
+        //跳转页面
+        this.$router.push({path: '/search'});
+      }
     }
   }
 </script>

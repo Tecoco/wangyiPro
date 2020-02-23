@@ -29,8 +29,8 @@ export default {
        
     },
     //获取分类右侧内容数据
-    async getCateListDataAction({commit}, cateIndex){
-        let result = await getCateListData(cateIndex);
-        commit( SAVE_CATE_LIST, result.data);
-    }
+    // async getCateListDataAction({commit}, cateIndex){
+    //     let result = await getCateListData(cateIndex);
+    //     commit( SAVE_CATE_LIST, result.data);
+    // }
 }

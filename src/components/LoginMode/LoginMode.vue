@@ -1,14 +1,16 @@
 <template>
-  <div id="login-mode-wrap" v-show="isShowLogin">
+  <div id="login-mode-wrap" v-show="isSubShowLogin">
     <div class="logo-wrap">
       <img src="https://yanxuan.nosdn.127.net/39c5e4583753d4c3cb868a64c2c109ea.png" alt="">
     </div>
     <div class="user-box">
      <form>
         <!-- 手机号登录 -->
-        <div class="phone-mode" v-show="!isShowLogin">
+        <div class="phone-mode" v-if="modeFlag === 1">
           <input name="phone" v-model="phone" v-validate="'required|mobile'" type="tel" maxlength="11" placeholder="请输入手机号" />
-          <input v-model="captcha" name="captcha" v-validate="'required|code'" type="text" maxlength="8" placeholder="请输入短信验证码" />
+          <span style="color: red;" v-show="errors.has('phone')">{{ errors.first('phone') }}</span>
+          <input v-model="captcha" name="captcha" v-validate="'required|captcha'" type="text" maxlength="8" placeholder="请输入短信验证码" />
+          <div class="sms-code">获取验证码</div>
           <div class="problem-pwd-wrap">
             <span class="problem">遇到问题？</span>
             <span class="pwd">使用密码验证登录</span>
@@ -26,9 +28,9 @@
           </div>
         </div>
         <!-- 邮箱账号登录 -->
-        <div class="email-mode">
-          <input name="phone" v-model="phone" v-validate="'required|mobile'" type="email" maxlength="11" placeholder="邮箱账号" />
-          <input v-model="captcha" name="captcha" v-validate="'required|code'" type="text" maxlength="8" placeholder="密码" />
+        <div class="email-mode" v-else>
+          <input name="email" v-model="email" v-validate="'required|email'" type="email" maxlength="11" placeholder="邮箱账号" />
+          <input v-model="pwd" name="pwd" v-validate="'required|code'" type="password" maxlength="8" placeholder="密码" />
           <div class="problem-pwd-wrap">
             <span class="problem">注册账号</span>
             <span class="pwd">忘记密码</span>
@@ -45,12 +47,14 @@
 
 <script type="text/ecmascript-6">
   export default {
-      props: ['isShowLogin'],
+      props: ['modeFlag'],
       data(){
           return {
-            phone: '',
+            email: '',
+            pwd: '',
             captcha: '',
-            isSubShowLogin: false
+            phone: '',
+            isSubShowLogin: true
           }
       },
      methods: {
@@ -58,8 +62,7 @@
 
       },
       handleSkip(){
-        this.isShowLogin = false;
-        this.$emit('one', this.isShowLogin);
+        this.$emit('func', this.isSubShowLogin = false)
       }
      }
   }
@@ -82,6 +85,7 @@
     box-sizing border-box
     //手机号登录方式
     .phone-mode
+      position relative
       >input
         width 100%
         outline none
@@ -89,7 +93,19 @@
         font-size 28px
         color #666
         border-bottom 1px solid #eee
-        height 120px          
+        height 120px  
+      .sms-code
+        position absolute
+        right 0
+        top 148px
+        width 164px
+        height 54px
+        line-height 54px
+        text-align center
+        font-size 28px
+        color #333
+        border 1px solid #7f7f7f
+        padding 5px
       .problem-pwd-wrap
         display flex
         justify-content space-between

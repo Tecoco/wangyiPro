@@ -8,7 +8,7 @@
       </router-link>
       <div class="title"><span>值得买</span></div>
       <div class="right">
-        <i class="iconfont icon-sousuo1"></i>
+        <i @click="handleClickSkip" class="iconfont icon-sousuo1"></i>
         <i class="iconfont icon-gouwuche"></i>
       </div>
     </div>
@@ -35,9 +35,8 @@
         <div class="swiper-pagination"></div>
       </div>
     </div>
-    <div class="waterfall-wrap">
-
-    </div>
+    <!-- 瀑布流布局 -->
+    <WaterFall />
   </div>
 </template>
 
@@ -46,7 +45,9 @@
 import _ from "lodash";
 import Swiper from "swiper";
 import "swiper/css/swiper.min.css";
+import WaterFall from '../../components/WaterFall/WaterFall';
   export default {
+    components: {WaterFall},
     data(){
       return {
         navList: [],
@@ -61,7 +62,14 @@ import "swiper/css/swiper.min.css";
         return _.chunk(this.navList, 8);
       }
     },
-     watch: {
+    methods: {
+      //搜索获取焦点
+      handleClickSkip(){
+        //跳转页面
+        this.$router.push({path: '/search'});
+      }
+    },
+    watch: {
       navList(){
         this.$nextTick(() => {
           new Swiper(".swiper-container", {
@@ -175,9 +183,6 @@ import "swiper/css/swiper.min.css";
           height 5px
           background-color red
   //瀑布流布局
-  .waterfall-wrap
-    width 100%
-    height 500px
-    background-color #eee    
+   
   
 </style>

@@ -13,7 +13,7 @@
           <i class="iconfont icon-sousuo"></i>
           <input @focus="handleFocus" class="placeholder" type="text" placeholder="搜索商品, 共20868款好物" />
         </div>
-        <div class="btn-login">登录</div>
+        <div @click="handleClickSkip" class="btn-login">登录</div>
       </div>
       <!-- 导航 -->
       <div class="nav-list">
@@ -289,6 +289,12 @@ export default {
     });
   },
   methods: {
+    //搜索获取焦点
+    handleClickSkip(){
+      //跳转页面
+      this.$router.push({path: '/search'});
+    },
+    
     //处理导航下标值
     changeNavIndex(index){
       this.navIndex = index;
